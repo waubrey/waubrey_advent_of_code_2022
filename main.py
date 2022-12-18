@@ -86,29 +86,32 @@ def rock_paper_scissors_p2(rps):
 
 
 def rucksack_priority_sum(input):
-    compartment_one = []
-    compartment_two = []
+    priority_sum = 0
     with open(input) as f:
         lines = f.readlines()
         for line in lines:
             line = line.strip()
-            half_list = int((len(line)-1) / 2)
-            #print(half_list)
-            compartment_one += [line[0:half_list]]
-            compartment_two += [line[half_list:]]
-        # for i in range(len(compartment_one)):
-        #     print(compartment_one[i])
-        #     if compartment_one[i] == compartment_two[i]:
-        #         print(compartment_one[i])
-        # print(compartment_one)
-        # print(compartment_two)
+            half_list = int((len(line)) / 2)
+            compartment_one = (line[0:half_list])
+            compartment_two = (line[half_list:])
+            both_compartments = intersection(compartment_one, compartment_two)
+            for item in both_compartments:
+                if item.islower():
+                    priority_sum += (ord(item) - 96)
+                elif item.isupper():
+                    priority_sum += (ord(item) - 38)
+        print("total =", priority_sum)
 
+
+def intersection(lst1, lst2):
+    return list(set(lst1) & set(lst2))
 
 
 if __name__ == '__main__':
     #elf_most_calories('input.txt')
-    elf_most_calories('test.txt')
+    #elf_most_calories('test.txt')
     #elf_most_calories_1pass("test.txt")
     # rock_paper_scissors_sg(rps.txt")
     #rock_paper_scissors_p2("rps.txt")
-    #rucksack_priority_sum("rucksack.txt")
+    # rucksack_priority_sum("rucksack_test.txt")
+    rucksack_priority_sum("rucksack.txt")
